@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+
+  
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  
+  <body>
+    
+    <div id="game-container">
+        
+    </div>
+
+   
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+      import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+      const appId = typeof __app_id !== 'undefined' ? __app_id : 'crazy-kitchen-brawl';
+      const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+      let app, db, auth;
+      if (Object.keys(firebaseConfig).length > 0) {
+          app = initializeApp(firebaseConfig);
+          db = getFirestore(app);
+          auth = getAuth(app);
+      }
+
+      window.db = db;
+      window.auth = auth;
+      window.appId = appId;
+      window.collection = collection;
+      window.addDoc = addDoc;
+      window.onSnapshot = onSnapshot;
+      window.signInAnonymously = signInAnonymously;
+      window.signInWithCustomToken = signInWithCustomToken;
+    </script>
+    
+    
+    <script src="sketch.js"></script>
+  </body>
+</html>
